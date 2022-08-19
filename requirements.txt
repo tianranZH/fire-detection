@@ -3,6 +3,8 @@ numpy
 matplotlib
 jupyter
 rasterio
-xarray
 pandas
 geopandas
+netCDF4
+h5py
+scipy
