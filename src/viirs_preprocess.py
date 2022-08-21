@@ -2,9 +2,10 @@ import numpy as np
 from skimage.transform import resize
 
 
+nx = 1536
+ny = 6400 # notice this number might change based on 85s/5min granule 
+
 def get_delete_list_in_agg_zone(agg_zone:int)->np.array:
-    nx = 1536*4
-    ny = 6400 # notice this number might change based on 85s/5min granule 
     if agg_zone == 1 or agg_zone == 6:
         crop_list = [0,1,2,3,28,29,30,31]
     elif agg_zone == 2 or agg_zone == 5:
@@ -46,4 +47,12 @@ def bowtie_crop_interpolate(viirs_arr:np.array,agg_zone:int)->np.array:
     agg_zone_del = np.delete(agg_zone_arr, agg_crop_list, 0)
     agg_zone_interp = resize(agg_zone_del,(agg_zone_nx,agg_zone_ny),order=2)
     viirs_arr[:,agg_zone_i:agg_zone_j] = agg_zone_interp
+    return viirs_arr
+
+def preprocess(viirs_arr:np.array) -> np.array:
+    # check if viirs is 85s or 5 min data
+    global nx,ny
+    nx,ny = viirs_arr.shape
+    for agg_zone in [1,2,5,6]:
+        viirs_arr = bowtie_crop_interpolate(viirs_arr,agg_zone)
     return viirs_arr
