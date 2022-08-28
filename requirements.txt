@@ -5,6 +5,16 @@ jupyter
 rasterio
 pandas
 geopandas
+pyproj
 netCDF4
 h5py
 scipy
+scikit-image
+ipyleaflet 
+nodejs
+jupyterlab
+osmnx
+npm
+rtree
+s3fs
+boto3
