@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import ndimage
 
-from src.viirs_preprocess import preprocess
+from viirs_preprocess import preprocess
 
 global mask_value 
 mask_value = -1
